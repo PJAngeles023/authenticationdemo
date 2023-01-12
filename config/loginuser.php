@@ -11,14 +11,19 @@ if($password != '' && $username != ""){
     $sql = "SELECT id, username, password FROM users WHERE username = '{$username}';";
     $result = $conn->query($sql);
 
-    $user = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
 
-    if(password_verify($password, $user['password'] )){
-        $_SESSION['id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        header('location: ../home.php');
-    }else{
-        $_SESSION['error'] = "Credentials do not match!";
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            header('location: ../home.php');
+        } else {
+            $_SESSION['error'] = "Credentials do not match!";
+            header('location: ../index.php');
+        }
+    }else {
+        $_SESSION['error'] = "User not found";
         header('location: ../index.php');
     }
 
