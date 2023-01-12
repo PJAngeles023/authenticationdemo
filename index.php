@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(isset($_SESSION['id'])){
+        header('location: home.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,17 +26,23 @@
                         </div>';
                         unset($_SESSION['success']);
                     }
+                    if(isset($_SESSION['error'])){
+                        echo '<div class="alert alert-danger" role="alert">
+                        '.$_SESSION['error'].'
+                        </div>';
+                        unset($_SESSION['error']);
+                    }
                 ?>
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form action="config/loginuser.php" method="POST">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="username" class="form-control" id="username">
+                                <input type="username" class="form-control" id="username" name="username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password">
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <span>&nbsp;<a href="register.php">No account? Register here.</a></span>

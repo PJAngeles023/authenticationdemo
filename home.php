@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['id'])){
+    header('location: index.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +19,8 @@
         <div class="row">
             <div class="col-md-8 p-5">
                 <h1 class="fw-bold">Home</h1>
-                <p>Welcome, <strong>{username}</strong>
-                <a href="index.php">Logout</a></p>
+                <p>Welcome, <strong><?php echo $_SESSION['username'] ?></strong>
+                <a href="config/logout.php">Logout</a></p>
                 <div class="card">
                     <div class="card-body">
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur deleniti doloribus ut saepe iste vel. Non distinctio consequatur maxime blanditiis eius odit ex deleniti inventore. Quo pariatur nam beatae iusto.</p>
