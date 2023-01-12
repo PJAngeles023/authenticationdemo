@@ -8,7 +8,7 @@ $password = $_POST['password'];
 $confirmpassword = $_POST['confirmpassword'];
 
 // Validate if passwords match
-if($password == $confirmpassword){
+if($password != '' && $password == $confirmpassword){
 
     // Validate if username is already taken
     $sql = "SELECT username FROM users WHERE username = '{$username}';";
